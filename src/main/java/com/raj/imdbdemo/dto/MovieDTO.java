@@ -1,20 +1,31 @@
 package com.raj.imdbdemo.dto;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class MovieDTO {
 
     private Long id;
     private String name;
     private Integer yearOfRelease;
     private String plot;
+    private MultipartFile poster;
 
     public MovieDTO() {
     }
 
-    public MovieDTO(Long id, String name, Integer yearOfRelease, String plot) {
-        this.id = id;
+    public MovieDTO(String name, Integer yearOfRelease, String plot, MultipartFile poster) {
         this.name = name;
         this.yearOfRelease = yearOfRelease;
         this.plot = plot;
+        this.poster = poster;
+    }
+
+    public MultipartFile getPoster() {
+        return poster;
+    }
+
+    public void setPoster(MultipartFile poster) {
+        this.poster = poster;
     }
 
     public Long getId() {
@@ -56,6 +67,7 @@ public class MovieDTO {
                 ", name='" + name + '\'' +
                 ", yearOfRelease=" + yearOfRelease +
                 ", plot='" + plot + '\'' +
+                ", poster=" + poster +
                 '}';
     }
 }

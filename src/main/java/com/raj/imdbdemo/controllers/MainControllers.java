@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -60,7 +61,7 @@ public class MainControllers {
         return "test";
     }
 
-    @GetMapping("/home")
+    @GetMapping({"/home", "/"})
     public String home() {
         System.out.println("In side Home Method");
         return "home";
@@ -74,9 +75,19 @@ public class MainControllers {
     }
 
     @PostMapping("/saveMovie")
-    public String saveMovie(@ModelAttribute("movie") MovieDTO movie) {
-        System.out.println("MainControllers.saveMovie + "+movie);
-        movieService.saveMovie(movie);
+    public String saveMovie(@RequestParam(name = "name") String name,
+                            @RequestParam(name = "yearOfRelease") int yearOfRelease,
+                            @RequestParam(name = "plot") String plot,
+                            @ModelAttribute("poster") MultipartFile poster) {
+        System.out.println("MainControllers.saveMovie + "+name+ yearOfRelease+plot+poster);
+        movieService.saveMovie(name,yearOfRelease,plot,poster);
+//        movieService.saveMovie(movie);
         return "redirect:/home";
     }
+//    @PostMapping("/saveMovie")
+//    public String saveMovie(@ModelAttribute("movie") MovieDTO movie) {
+//        System.out.println("MainControllers.saveMovie + "+movie);
+//        movieService.saveMovie(movie);
+//        return "redirect:/home";
+//    }
 }

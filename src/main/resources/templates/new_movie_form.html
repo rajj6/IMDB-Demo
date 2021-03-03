@@ -9,19 +9,28 @@
           crossorigin="anonymous">
 </head>
 <body>
+
     <div class="container">
-        <h2>Create Movie</h2>
-        <form action="#" th:action="@{/saveMovie}" th:object="${movie}" method="post">
-            <input type="text" th:field="*{name}" placeholder="Name" class="form-control mb cp-4" required>
-            <input type="number" th:field="*{yearOfRelease}" placeholder="Year Of Release" class="form-control mb cp-4" required>
-            <textarea type="text" rows="10" th:field="*{plot}" placeholder="Plot" class="form-control mb cp-4" required></textarea>
-            <!--            <input type="text" th:value="${loggedInUser.uid}" th:field="*{author}" class="form-control mb cp-4">-->
-<!--            <input type="" th:field="*{tagsString}" placeholder="Tags" class="form-control mb cp-4">-->
+<!--        <h2>Create Movie</h2>-->
+<!--        <form action="#" th:action="@{/saveMovie}" th:object="${movie}" method="post">-->
+<!--            <input type="text" th:field="*{name}" placeholder="Name" class="form-control mb cp-4" required>-->
+<!--            <input type="number" th:field="*{yearOfRelease}" placeholder="Year Of Release" class="form-control mb cp-4" required>-->
+<!--            <textarea type="text" rows="10" th:field="*{plot}" placeholder="Plot" class="form-control mb cp-4" required></textarea>-->
+<!--            <label for="poster" class="btn">Select Image:</label>-->
+<!--            <input id="poster" type="file" th:field="*{poster}" required formenctype="multipart/form-data">-->
+<!--            <button type="submit" class="btn btn-info col-2"> Save </button>-->
+<!--        </form>-->
+
+        <h2>Create Movie Form2</h2>
+        <form action="/saveMovie" method="post" enctype="multipart/form-data">
+            <input type="text" name="name" placeholder="Name" class="form-control mb cp-4" required>
+            <input type="number" name="yearOfRelease" placeholder="Year Of Release" class="form-control mb cp-4" required>
+            <textarea type="text" name="plot" rows="10" placeholder="Plot" class="form-control mb cp-4" required></textarea>
+            <label for="poster" class="btn">Select Image:</label>
+            <input id="poster" type="file" name="poster" required>
             <button type="submit" class="btn btn-info col-2"> Save </button>
         </form>
-
         <hr>
-
         <a th:href = "@{/home}"> Back to Home Page</a>
     </div>
 

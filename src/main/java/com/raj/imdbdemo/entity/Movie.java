@@ -1,5 +1,7 @@
 package com.raj.imdbdemo.entity;
 
+import org.hibernate.annotations.Type;
+
 import javax.persistence.*;
 
 @Entity
@@ -11,15 +13,33 @@ public class Movie {
     private Long id;
     private String name;
     private Integer yearOfRelease;
+
+    @Type(type = "org.hibernate.type.TextType")
     private String plot;
+
+    @Lob
+    @Type(type = "org.hibernate.type.ImageType")
+    private byte[] poster;
+
+    private String imgType;
 
     public Movie() {
     }
 
-    public Movie(String name, Integer yearOfRelease, String plot) {
+    public Movie(String name, Integer yearOfRelease, String plot, byte[] poster, String imgType) {
         this.name = name;
         this.yearOfRelease = yearOfRelease;
         this.plot = plot;
+        this.poster = poster;
+        this.imgType = imgType;
+    }
+
+    public byte[] getPoster() {
+        return poster;
+    }
+
+    public void setPoster(byte[] poster) {
+        this.poster = poster;
     }
 
     public Long getId() {
@@ -52,6 +72,14 @@ public class Movie {
 
     public void setPlot(String plot) {
         this.plot = plot;
+    }
+
+    public String getImgType() {
+        return imgType;
+    }
+
+    public void setImgType(String imgType) {
+        this.imgType = imgType;
     }
 
     @Override
