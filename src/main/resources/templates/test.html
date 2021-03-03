@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Testing is Going On</title>
+</head>
+<body>
+<H1>Testing Page</H1>
+<form action="/test_upload" method="post" enctype="multipart/form-data">
+    <input type="file" name="file">
+    <input type="submit" value="Upload Poster">
+</form>
+<img th:src="*{'data:image/jpg;base64,'+ epic}" alt="#" />
+</body>
+</html>
