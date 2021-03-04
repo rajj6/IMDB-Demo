@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ProducerRepository extends JpaRepository<Producer, Long> {
+    Producer findProducerByNameIgnoreCase(String name);
 }

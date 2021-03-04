@@ -2,6 +2,7 @@ package com.raj.imdbdemo.controllers;
 
 import com.raj.imdbdemo.dto.MovieDTO;
 import com.raj.imdbdemo.entity.TestEntity;
+import com.raj.imdbdemo.repo.ProducerRepository;
 import com.raj.imdbdemo.repo.TestRepo;
 import com.raj.imdbdemo.service.MovieService;
 import org.apache.tomcat.util.codec.binary.Base64;
@@ -25,10 +26,13 @@ public class MainControllers {
     @Autowired
     TestRepo testRepo;
 
+    @Autowired
+    ProducerRepository producerRepository;
+
     @GetMapping("/test")
     public String test(Model model) throws IOException {
         System.out.println("Inside Get ,Test method");
-        model.addAttribute("movie", movieService.getMovieById(2l));
+//        model.addAttribute("movie", movieService.getMovieById(2l));
 //        TestEntity testEntity = testRepo.findById(1l).get();
 //        System.out.println(testEntity.getName());
 //        System.out.println(testEntity.getPic());
@@ -36,11 +40,9 @@ public class MainControllers {
 //        byte[] encodeBase64 = Base64.encodeBase64(testEntity.getPic());
 //        String base64Encoded = new String(encodeBase64);
 //        model.addAttribute("epic", base64Encoded);
-
+        System.out.println(producerRepository.findProducerByNameIgnoreCase("Raj"));
         return "test";
     }
-
-
 
     @PostMapping("/test_upload")
     public String testUpload(@ModelAttribute("file") MultipartFile file) throws IOException {
@@ -84,7 +86,7 @@ public class MainControllers {
                             @ModelAttribute("poster") MultipartFile poster,
                             @ModelAttribute("producer") String producer) {
         System.out.println("MainControllers.saveMovie + "+name+ yearOfRelease+plot+poster);
-        movieService.saveMovie(name,yearOfRelease,plot,poster);
+        movieService.saveMovie(name,yearOfRelease,plot,poster,producer);
 //        movieService.saveMovie(movie);
         return "redirect:/home";
     }

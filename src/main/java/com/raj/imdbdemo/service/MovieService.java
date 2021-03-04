@@ -2,7 +2,9 @@ package com.raj.imdbdemo.service;
 
 import com.raj.imdbdemo.dto.MovieDTO;
 import com.raj.imdbdemo.entity.Movie;
+import com.raj.imdbdemo.entity.Producer;
 import com.raj.imdbdemo.repo.MovieRepository;
+import com.raj.imdbdemo.repo.ProducerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -17,11 +19,14 @@ public class MovieService {
     @Autowired
     private MovieRepository movieRepository;
 
+    @Autowired
+    private ProducerRepository producerRepository;
+
 //    public void saveMovie(MovieDTO movieDTO) {
 ////        Movie movie = new Movie(movieDTO.getName(), movieDTO.getYearOfRelease(), movieDTO.getPlot());
 //        movieRepository.save(new Movie(movieDTO.getName(), movieDTO.getYearOfRelease(), movieDTO.getPlot()));
 //    }
-    public void saveMovie(String name, Integer yearOdRelease, String plot, MultipartFile poster) {
+    public void saveMovie(String name, Integer yearOdRelease, String plot, MultipartFile poster, String producerName) {
 
         try {
             Movie movie = new Movie();
@@ -30,6 +35,12 @@ public class MovieService {
             movie.setPlot(plot);
             movie.setPoster(poster.getBytes());
             movie.setImgType(poster.getContentType());
+            Producer producer = producerRepository.findProducerByNameIgnoreCase(producerName);
+            if (producer != null) {
+                movie.setProducer(producer);
+            } else {
+                movie.setProducer(producerRepository.save(new Producer(producerName)));
+            }
             movieRepository.save(movie);
         } catch (IOException e) {
             e.printStackTrace();

@@ -7,7 +7,7 @@ import java.sql.Date;
 import java.util.Collection;
 
 @Entity
-@Table(name = "producers")
+@Table(name = "producers", uniqueConstraints = @UniqueConstraint(name = "Unique Name of Producer", columnNames = "name"))
 public class Producer {
 
     @Id
@@ -26,6 +26,10 @@ public class Producer {
 
     public Long getId() {
         return id;
+    }
+
+    public Producer(String name) {
+        this.name = name;
     }
 
     public void setId(Long id) {
@@ -80,5 +84,17 @@ public class Producer {
     }
 
     public Producer() {
+    }
+
+    @Override
+    public String toString() {
+        return "Producer{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", sex='" + sex + '\'' +
+                ", DOB=" + DOB +
+                ", bio='" + bio + '\'' +
+                ", movies=" + movies +
+                '}';
     }
 }
