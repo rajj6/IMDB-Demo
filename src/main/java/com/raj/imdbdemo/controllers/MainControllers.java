@@ -66,7 +66,7 @@ public class MainControllers {
     @GetMapping({"/home", "/"})
     public String home(Model model) {
         System.out.println("In side Home Method");
-//        model.addAttribute("movie", )
+        model.addAttribute("movies", movieService.getAllMovies());
         return "home";
     }
 

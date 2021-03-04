@@ -7,11 +7,40 @@
           href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
           integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
           crossorigin="anonymous">
+    <style>
+        img {
+             width: 150px;
+             height: auto;
+        }
+    </style>
 </head>
 <body>
     <h1>Home Page</h1>
     <a th:href="@{/showNewMovieForm}" class="btn btn-primary btn-sm mb-2"> Create Movie </a>
 
+    <table border="1" class="table table-striped table-responsive-md">
+        <thead>
+        <tr>
+            <th> Poster </th>
+            <th> Plot </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="movie : ${movies}">
+            <td>
+                <img th:src="*{'data:' + movie.imgType + ';base64,' + movie.encodedPoster}" alt="Poster of movie"/>
+<!--                <b class="bold" th:text="${post.title}"></b>-->
+<!--                <p th:text="${post.excerpt}"></p>-->
+<!--                <span>Author:</span><span th:text="${post.author.name}"></span>-->
+<!--                <b th:text="${post.publishedAt}"></b>-->
+            </td>
+            <td>
+                <p th:text="${movie.plot}"></p>
+<!--                <a th:href="@{/showPost/{id}(id=${post.pid})}" class="btn btn-primary">Show</a>-->
+            </td>
+        </tr>
+        </tbody>
+    </table>
 <!--    <form action="/test_upload" method="post" enctype="multipart/form-data">-->
 <!--        <input type="file" name="file">-->
 <!--        <input type="submit" value="Upload Poster">-->

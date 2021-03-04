@@ -39,6 +39,14 @@ public class MovieService {
     public MovieDTO getMovieById(Long id) {
         return MovieDTO.mapEntityToDTO(movieRepository.getOne(id));
     }
+    public List<MovieDTO> getAllMovies() {
+        List<MovieDTO> movieDTOList = new ArrayList<>();
+        for(Movie movie : movieRepository.findAll()) {
+            movieDTOList.add(MovieDTO.mapEntityToDTO(movie));
+        }
+        return movieDTOList;
+    }
+
 
 //    public List<MovieDTO> getAllMovies() {
 //        movieRepository.findAll();
