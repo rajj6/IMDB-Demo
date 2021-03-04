@@ -21,13 +21,14 @@
 <!--            <button type="submit" class="btn btn-info col-2"> Save </button>-->
 <!--        </form>-->
 
-        <h2>Create Movie Form2</h2>
+        <h2>Create Movie</h2>
         <form action="/saveMovie" method="post" enctype="multipart/form-data">
             <input type="text" name="name" placeholder="Name" class="form-control mb cp-4" required>
             <input type="number" name="yearOfRelease" placeholder="Year Of Release" class="form-control mb cp-4" required>
             <textarea type="text" name="plot" rows="10" placeholder="Plot" class="form-control mb cp-4" required></textarea>
             <label for="poster" class="btn">Select Image:</label>
             <input id="poster" type="file" name="poster" required>
+            <input type="text" name="producer" required>
             <button type="submit" class="btn btn-info col-2"> Save </button>
         </form>
         <hr>

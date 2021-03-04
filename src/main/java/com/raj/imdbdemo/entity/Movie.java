@@ -23,6 +23,9 @@ public class Movie {
 
     private String imgType;
 
+    @ManyToOne
+    private Producer producer;
+
     public Movie() {
     }
 
@@ -80,6 +83,14 @@ public class Movie {
 
     public void setImgType(String imgType) {
         this.imgType = imgType;
+    }
+
+    public Producer getProducer() {
+        return producer;
+    }
+
+    public void setProducer(Producer producer) {
+        this.producer = producer;
     }
 
     @Override

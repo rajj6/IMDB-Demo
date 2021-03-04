@@ -4,10 +4,11 @@ import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.util.Collection;
 
 @Entity
 @Table(name = "producers")
-public class Producers {
+public class Producer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -19,6 +20,9 @@ public class Producers {
 
     @Type(type = "org.hibernate.type.TextType")
     private String bio;
+
+    @OneToMany(mappedBy = "producer")
+    private Collection<Movie> movies;
 
     public Long getId() {
         return id;
@@ -56,17 +60,25 @@ public class Producers {
         return bio;
     }
 
+    public Collection<Movie> getMovies() {
+        return movies;
+    }
+
+    public void setMovies(Collection<Movie> movies) {
+        this.movies = movies;
+    }
+
     public void setBio(String bio) {
         this.bio = bio;
     }
 
-    public Producers(String name, String sex, Date DOB, String bio) {
+    public Producer(String name, String sex, Date DOB, String bio) {
         this.name = name;
         this.sex = sex;
         this.DOB = DOB;
         this.bio = bio;
     }
 
-    public Producers() {
+    public Producer() {
     }
 }
