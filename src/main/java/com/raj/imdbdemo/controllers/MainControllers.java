@@ -28,13 +28,15 @@ public class MainControllers {
     @GetMapping("/test")
     public String test(Model model) throws IOException {
         System.out.println("Inside Get ,Test method");
-        TestEntity testEntity = testRepo.findById(1l).get();
-        System.out.println(testEntity.getName());
-        System.out.println(testEntity.getPic());
+        model.addAttribute("movie", movieService.getMovieById(2l));
+//        TestEntity testEntity = testRepo.findById(1l).get();
+//        System.out.println(testEntity.getName());
+//        System.out.println(testEntity.getPic());
+//
+//        byte[] encodeBase64 = Base64.encodeBase64(testEntity.getPic());
+//        String base64Encoded = new String(encodeBase64);
+//        model.addAttribute("epic", base64Encoded);
 
-        byte[] encodeBase64 = Base64.encodeBase64(testEntity.getPic());
-        String base64Encoded = new String(encodeBase64);
-        model.addAttribute("epic", base64Encoded);
         return "test";
     }
 
@@ -62,15 +64,16 @@ public class MainControllers {
     }
 
     @GetMapping({"/home", "/"})
-    public String home() {
+    public String home(Model model) {
         System.out.println("In side Home Method");
+//        model.addAttribute("movie", )
         return "home";
     }
 
     @GetMapping("/showNewMovieForm")
     public String newMovieForm(Model model) {
         System.out.println("Inside New Movie Form");
-        model.addAttribute("movie", new MovieDTO());
+//        model.addAttribute("movie", new MovieDTO());
         return "new_movie_form";
     }
 

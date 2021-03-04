@@ -1,5 +1,7 @@
 package com.raj.imdbdemo.dto;
 
+import com.raj.imdbdemo.entity.Movie;
+import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.web.multipart.MultipartFile;
 
 public class MovieDTO {
@@ -9,8 +11,33 @@ public class MovieDTO {
     private Integer yearOfRelease;
     private String plot;
     private MultipartFile poster;
+    private String encodedPoster;
+    private String imgType;
 
     public MovieDTO() {
+    }
+
+    public MovieDTO(Movie movie) {
+
+    }
+
+    public String getEncodedPoster() {
+        return encodedPoster;
+    }
+
+    public void setEncodedPoster(String encodedPoster) {
+        this.encodedPoster = encodedPoster;
+    }
+
+    public static MovieDTO mapEntityToDTO(Movie movie) {
+        MovieDTO movieDTO = new MovieDTO();
+        movieDTO.setId(movie.getId());
+        movieDTO.setName(movie.getName());
+        movieDTO.setYearOfRelease(movie.getYearOfRelease());
+        movieDTO.setPlot(movie.getPlot());
+        movieDTO.setEncodedPoster(new String(Base64.encodeBase64(movie.getPoster())));
+        movieDTO.setImgType(movie.getImgType());
+        return movieDTO;
     }
 
     public MovieDTO(String name, Integer yearOfRelease, String plot, MultipartFile poster) {
@@ -59,6 +86,15 @@ public class MovieDTO {
     public void setPlot(String plot) {
         this.plot = plot;
     }
+
+    public String getImgType() {
+        return imgType;
+    }
+
+    public void setImgType(String imgType) {
+        this.imgType = imgType;
+    }
+
 
     @Override
     public String toString() {
