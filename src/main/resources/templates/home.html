@@ -23,6 +23,7 @@
         <tr>
             <th> Poster </th>
             <th> Plot </th>
+            <th> Action </th>
         </tr>
         </thead>
         <tbody>
@@ -37,6 +38,9 @@
             <td>
                 <p th:text="${movie.plot}"></p>
 <!--                <a th:href="@{/showPost/{id}(id=${post.pid})}" class="btn btn-primary">Show</a>-->
+            </td>
+            <td>
+                <a th:href="@{/deleteMovie/{id}(id=${movie.id})}" class="btn btn-primary">Delete</a>
             </td>
         </tr>
         </tbody>

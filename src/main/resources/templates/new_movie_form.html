@@ -24,7 +24,7 @@
         <h2>Create Movie</h2>
         <form action="/saveMovie" method="post" enctype="multipart/form-data">
             <input type="text" name="name" placeholder="Title of Movie" class="form-control mb cp-4" required>
-            <input type="number" name="yearOfRelease" placeholder="Year Of Release" class="form-control mb cp-4" required>
+            <input type="number" name="yearOfRelease" placeholder="Year Of Release" class="form-control mb cp-4" min="1980" max="2022" required>
             <textarea type="text" name="plot" rows="10" placeholder="Plot of Movie" class="form-control mb cp-4" required></textarea>
             <input type="text" name="producer" placeholder="Producer name" class="form-control mb cp-4" required>
             <input type="text" name="actors" placeholder="Actors names" class="form-control mb cp-4" required>

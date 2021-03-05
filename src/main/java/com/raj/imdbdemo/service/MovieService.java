@@ -75,6 +75,9 @@ public class MovieService {
         return movieDTOList;
     }
 
+    public void deleteMovieById(long id) {
+        movieRepository.deleteById(id);
+    }
 
 //    public List<MovieDTO> getAllMovies() {
 //        movieRepository.findAll();

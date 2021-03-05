@@ -9,10 +9,7 @@ import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -89,6 +86,12 @@ public class MainControllers {
         System.out.println("MainControllers.saveMovie + "+name+ yearOfRelease+plot+poster);
         movieService.saveMovie(name,yearOfRelease,plot,poster,producer, actors);
 //        movieService.saveMovie(movie);
+        return "redirect:/home";
+    }
+
+    @GetMapping("/deleteMovie/{id}")
+    public String deleteMovie(@PathVariable("id") Long id) {
+        movieService.deleteMovieById(id);
         return "redirect:/home";
     }
 //    @PostMapping("/saveMovie")
