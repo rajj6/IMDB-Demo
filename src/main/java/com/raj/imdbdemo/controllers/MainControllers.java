@@ -84,9 +84,10 @@ public class MainControllers {
                             @RequestParam(name = "yearOfRelease") int yearOfRelease,
                             @RequestParam(name = "plot") String plot,
                             @ModelAttribute("poster") MultipartFile poster,
-                            @ModelAttribute("producer") String producer) {
+                            @ModelAttribute("producer") String producer,
+                            @ModelAttribute("actors") String actors) {
         System.out.println("MainControllers.saveMovie + "+name+ yearOfRelease+plot+poster);
-        movieService.saveMovie(name,yearOfRelease,plot,poster,producer);
+        movieService.saveMovie(name,yearOfRelease,plot,poster,producer, actors);
 //        movieService.saveMovie(movie);
         return "redirect:/home";
     }

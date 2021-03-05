@@ -1,8 +1,10 @@
 package com.raj.imdbdemo.service;
 
 import com.raj.imdbdemo.dto.MovieDTO;
+import com.raj.imdbdemo.entity.Actor;
 import com.raj.imdbdemo.entity.Movie;
 import com.raj.imdbdemo.entity.Producer;
+import com.raj.imdbdemo.repo.ActorRepository;
 import com.raj.imdbdemo.repo.MovieRepository;
 import com.raj.imdbdemo.repo.ProducerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,11 +24,25 @@ public class MovieService {
     @Autowired
     private ProducerRepository producerRepository;
 
+    @Autowired
+    private ActorRepository actorRepository;
+
+    private void addActorsInMovie(Movie movie, String actors) {
+        for (String actorName : actors.split(",")) {
+            Actor actor = actorRepository.findActorByNameIgnoreCase(actorName);
+            if( actor != null ) {
+                movie.getActors().add(actor);
+            } else {
+                movie.getActors().add(actorRepository.save(new Actor(actorName)));
+            }
+        }
+    }
+
 //    public void saveMovie(MovieDTO movieDTO) {
 ////        Movie movie = new Movie(movieDTO.getName(), movieDTO.getYearOfRelease(), movieDTO.getPlot());
 //        movieRepository.save(new Movie(movieDTO.getName(), movieDTO.getYearOfRelease(), movieDTO.getPlot()));
 //    }
-    public void saveMovie(String name, Integer yearOdRelease, String plot, MultipartFile poster, String producerName) {
+    public void saveMovie(String name, Integer yearOdRelease, String plot, MultipartFile poster, String producerName, String actors) {
 
         try {
             Movie movie = new Movie();
@@ -41,6 +57,7 @@ public class MovieService {
             } else {
                 movie.setProducer(producerRepository.save(new Producer(producerName)));
             }
+            addActorsInMovie(movie, actors);
             movieRepository.save(movie);
         } catch (IOException e) {
             e.printStackTrace();

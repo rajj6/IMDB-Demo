@@ -3,6 +3,7 @@ package com.raj.imdbdemo.entity;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -29,7 +30,7 @@ public class Movie {
     private Producer producer;
 
     @ManyToMany
-    private Set<Actor> actors;
+    private Set<Actor> actors = new HashSet<>();
 
     public Movie() {
     }

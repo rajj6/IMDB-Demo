@@ -2,18 +2,17 @@ package com.raj.imdbdemo.entity;
 
 import org.hibernate.annotations.Type;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.sql.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "actors")
+@Table(name = "actors", uniqueConstraints = @UniqueConstraint(name = "Unique Name of Actor", columnNames = "name"))
 public class Actor {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String name;
     private String sex;
@@ -22,8 +21,8 @@ public class Actor {
     @Type(type = "org.hibernate.type.TextType")
     private String bio;
 
-    @ManyToMany
-    private Set<Movie> movies;
+    @ManyToMany(mappedBy = "actors")
+    private Set<Movie> movies = new HashSet<>();
 
     public Actor() {
     }
@@ -33,6 +32,10 @@ public class Actor {
         this.sex = sex;
         this.DOB = DOB;
         this.bio = bio;
+    }
+
+    public Actor(String name) {
+        this.name = name;
     }
 
     public Long getId() {
