@@ -3,6 +3,8 @@ package com.raj.imdbdemo.entity;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "movies")
@@ -25,6 +27,9 @@ public class Movie {
 
     @ManyToOne
     private Producer producer;
+
+    @ManyToMany
+    private Set<Actor> actors;
 
     public Movie() {
     }
@@ -91,6 +96,14 @@ public class Movie {
 
     public void setProducer(Producer producer) {
         this.producer = producer;
+    }
+
+    public Set<Actor> getActors() {
+        return actors;
+    }
+
+    public void setActors(Set<Actor> actors) {
+        this.actors = actors;
     }
 
     @Override

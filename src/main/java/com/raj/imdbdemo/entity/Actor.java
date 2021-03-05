@@ -4,8 +4,10 @@ import org.hibernate.annotations.Type;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import java.sql.Date;
+import java.util.Set;
 
 @Entity
 @Table(name = "actors")
@@ -19,6 +21,9 @@ public class Actor {
 
     @Type(type = "org.hibernate.type.TextType")
     private String bio;
+
+    @ManyToMany
+    private Set<Movie> movies;
 
     public Actor() {
     }
@@ -68,6 +73,14 @@ public class Actor {
 
     public void setBio(String bio) {
         this.bio = bio;
+    }
+
+    public Set<Movie> getMovies() {
+        return movies;
+    }
+
+    public void setMovies(Set<Movie> movies) {
+        this.movies = movies;
     }
 
     @Override
