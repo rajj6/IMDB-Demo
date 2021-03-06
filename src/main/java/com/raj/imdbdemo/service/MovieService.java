@@ -29,11 +29,11 @@ public class MovieService {
 
     private void addActorsInMovie(Movie movie, String actors) {
         for (String actorName : actors.split(",")) {
-            Actor actor = actorRepository.findActorByNameIgnoreCase(actorName);
+            Actor actor = actorRepository.findActorByNameIgnoreCase(actorName.trim());
             if( actor != null ) {
                 movie.getActors().add(actor);
             } else {
-                movie.getActors().add(actorRepository.save(new Actor(actorName)));
+                movie.getActors().add(actorRepository.save(new Actor(actorName.trim())));
             }
         }
     }
@@ -62,6 +62,30 @@ public class MovieService {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void updateMovie(MovieDTO movieDTO, MultipartFile poster) {
+        Movie movie = movieRepository.getOne(movieDTO.getId());
+        movie.setName(movieDTO.getName());
+        movie.setYearOfRelease(movieDTO.getYearOfRelease());
+        movie.setPlot(movieDTO.getPlot());
+        movie.getActors().clear();
+        addActorsInMovie(movie, movieDTO.getActors());
+        Producer producer = producerRepository.findProducerByNameIgnoreCase(movieDTO.getProducer());
+        if (producer != null) {
+            movie.setProducer(producer);
+        } else {
+            movie.setProducer(producerRepository.save(new Producer(movieDTO.getProducer())));
+        }
+        if (!poster.isEmpty()) {
+            try {
+                movie.setPoster(poster.getBytes());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            movie.setImgType(poster.getContentType());
+        }
+        movieRepository.save(movie);
     }
 
     public MovieDTO getMovieById(Long id) {

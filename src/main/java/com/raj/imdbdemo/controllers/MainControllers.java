@@ -94,6 +94,31 @@ public class MainControllers {
         movieService.deleteMovieById(id);
         return "redirect:/home";
     }
+
+    @GetMapping("/editMovie/{id}")
+    public String editMovie(@PathVariable("id") Long id, Model model) {
+        model.addAttribute("movie",movieService.getMovieById(id));
+        return "edit_movie_form";
+//        return "redirect:/home";
+    }
+
+    @PostMapping("/updateMovie")
+    public String updateMovie(@ModelAttribute("movie") MovieDTO movie,
+                              @ModelAttribute("poster") MultipartFile poster) {
+        System.out.println("MainControllers.updateMovie");
+        System.out.println(movie);
+        System.out.println("HI printing poster");
+        if(poster != null) {
+            System.out.println("Null hai");
+        }else {
+            System.out.println("Null nhi hai");
+        }
+        System.out.println(poster.getContentType() == "");
+        System.out.println(poster.isEmpty());
+        movieService.updateMovie(movie, poster);
+        return "redirect:/home";
+    }
+
 //    @PostMapping("/saveMovie")
 //    public String saveMovie(@ModelAttribute("movie") MovieDTO movie) {
 //        System.out.println("MainControllers.saveMovie + "+movie);

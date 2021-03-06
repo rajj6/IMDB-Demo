@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit_movie</title>
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+          crossorigin="anonymous">
+    <style>
+        img {
+             width: 150px;
+             height: auto;
+        }
+    </style>
+</head>
+<body>
+    <h2>Edit Movie</h2>movie
+    <form action="#" th:action="@{/updateMovie}" method="post" enctype="multipart/form-data">
+        <input type="hidden" th:field="*{movie.id}">
+        <input type="text" th:field="*{movie.name}" placeholder="Title of Movie" class="form-control mb cp-4" required>
+        <input type="number" th:field="*{movie.yearOfRelease}" placeholder="Year Of Release" class="form-control mb cp-4" min="1980" max="2022" required>
+        <textarea type="text" th:field="*{movie.plot}" name="plot" rows="10" placeholder="Plot of Movie" class="form-control mb cp-4" required></textarea>
+        <input type="text" th:field="*{movie.producer}" name="producer" placeholder="Producer name" class="form-control mb cp-4" required>
+        <input type="text" th:field="*{movie.actors}" name="actors" placeholder="Actors names" class="form-control mb cp-4" required>
+        <label for="poster" class="btn">Select New Poster of Movie:</label>
+        <input id="poster" type="file" name="poster" >
+        <button type="submit" class="btn btn-info col-2"> Save </button>
+    </form>
+    <img th:src="*{'data:' + movie.imgType + ';base64,' + movie.encodedPoster}" alt="Poster of movie"/>
+</body>
+</html>

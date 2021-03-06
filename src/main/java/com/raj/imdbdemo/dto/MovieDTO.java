@@ -1,5 +1,6 @@
 package com.raj.imdbdemo.dto;
 
+import com.raj.imdbdemo.entity.Actor;
 import com.raj.imdbdemo.entity.Movie;
 import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.web.multipart.MultipartFile;
@@ -13,6 +14,9 @@ public class MovieDTO {
     private MultipartFile poster;
     private String encodedPoster;
     private String imgType;
+
+    private String producer = "";
+    private String actors = "";
 
     public MovieDTO() {
     }
@@ -37,6 +41,8 @@ public class MovieDTO {
         movieDTO.setPlot(movie.getPlot());
         movieDTO.setEncodedPoster(new String(Base64.encodeBase64(movie.getPoster())));
         movieDTO.setImgType(movie.getImgType());
+        movieDTO.setProducer(movie);
+        movieDTO.setActors(movie);
         return movieDTO;
     }
 
@@ -95,6 +101,33 @@ public class MovieDTO {
         this.imgType = imgType;
     }
 
+    public String getProducer() {
+        return producer;
+    }
+
+    public void setProducer(String producer) {
+        this.producer = producer;
+    }
+
+    public void setProducer(Movie movie) {
+        this.producer = movie.getProducer().getName();
+    }
+
+    public String getActors() {
+        return actors;
+    }
+
+    public void setActors(String actors) {
+        this.actors = actors;
+    }
+
+    public void setActors(Movie movie) {
+        String actors = "";
+        for (Actor actor : movie.getActors()) {
+            actors += actor.getName() + ",";
+        }
+        this.actors = actors;
+    }
 
     @Override
     public String toString() {

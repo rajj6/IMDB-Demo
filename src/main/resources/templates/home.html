@@ -40,7 +40,8 @@
 <!--                <a th:href="@{/showPost/{id}(id=${post.pid})}" class="btn btn-primary">Show</a>-->
             </td>
             <td>
-                <a th:href="@{/deleteMovie/{id}(id=${movie.id})}" class="btn btn-primary">Delete</a>
+                <a th:href="@{/deleteMovie/{id}(id=${movie.id})}" class="btn btn-danger">Delete</a>
+                <a th:href="@{/editMovie/{id}(id=${movie.id})}" class="btn btn-primary">Edit</a>
             </td>
         </tr>
         </tbody>
