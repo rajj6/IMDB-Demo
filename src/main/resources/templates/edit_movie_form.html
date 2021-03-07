@@ -27,6 +27,8 @@
         <input id="poster" type="file" name="poster" >
         <button type="submit" class="btn btn-info col-2"> Save </button>
     </form>
+    <a th:href = "@{/home}"> Back to Home Page</a>
+    <h3>Current Poster</h3>
     <img th:src="*{'data:' + movie.imgType + ';base64,' + movie.encodedPoster}" alt="Poster of movie"/>
 </body>
 </html>

@@ -23,7 +23,7 @@
         <thead>
         <tr>
             <th> Poster </th>
-            <th> Plot </th>
+            <th> Details </th>
             <th> Action </th>
         </tr>
         </thead>
@@ -37,7 +37,14 @@
 <!--                <b th:text="${post.publishedAt}"></b>-->
             </td>
             <td>
-                <p th:text="${movie.plot}"></p>
+                <b class="bold" th:text="${movie.name}"></b><br>
+                <span th:text="${movie.plot}"></span><br>
+                <b class="bold" >Actors:</b>
+                <span class="bold" th:text="${movie.actors}"></span><br>
+                <b class="bold" >Producer:</b>
+                <span class="bold" th:text="${movie.producer}"></span><br>
+                <b class="bold" >Year Of Release:</b>
+                <span class="bold" th:text="${movie.yearOfRelease}"></span>
 <!--                <a th:href="@{/showPost/{id}(id=${post.pid})}" class="btn btn-primary">Show</a>-->
             </td>
             <td>
