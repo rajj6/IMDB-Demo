@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit Producer</title>
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+          crossorigin="anonymous">
+</head>
+<body>
+<div class="container">
+    <h2>Edit Producer</h2>
+    <form action="#" th:action="@{/updateProducer}" method="post" enctype="multipart/form-data">
+        <input type="hidden" th:field="*{producer.id}">
+        <input type="text" th:field="*{producer.name}" placeholder="Name" class="form-control mb cp-4" required>
+        <input type="text" th:field="*{producer.sex}" placeholder="Sex" class="form-control mb cp-4" required>
+        <input type="date" th:field="*{producer.DOB}" placeholder="Date of Birth" class="form-control mb cp-4" required>
+        <textarea th:field="*{producer.bio}" rows="5" placeholder="Bio" class="form-control mb cp-4" required></textarea>
+        <button type="submit" class="btn btn-info col-2"> Save </button>
+    </form>
+    <a th:href = "@{/producers}"> Show all Producers</a>
+</div>
+</body>
+</html>

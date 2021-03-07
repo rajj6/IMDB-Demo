@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>All Producers</title>
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+          crossorigin="anonymous">
+</head>
+<body>
+    <div class="container">
+        <h1>All Producers</h1>
+        <table border="1" class="table table-striped table-responsive-md">
+            <thead>
+            <tr>
+                <th> Name </th>
+                <th> Sex </th>
+                <th> Date Of Birth </th>
+                <th> Bio </th>
+                <th> Action </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="producer : ${producers}">
+                <td>
+                    <b class="bold" th:text="${producer.name}"></b>
+                </td>
+                <td>
+                    <p th:text="${producer.sex}"></p>
+                </td>
+                <td>
+                    <p th:text="${producer.DOB}"></p>
+                </td>
+                <td>
+                    <p th:text="${producer.bio}"></p>
+                </td>
+                <td>
+                    <a th:href="@{/editProducer/{id}(id=${producer.id})}" class="btn btn-primary">Edit</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+        <a th:href = "@{/home}"> Back to Home Page</a>
+    </div>
+</body>
+</html>
