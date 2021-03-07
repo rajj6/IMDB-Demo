@@ -32,10 +32,6 @@
         <tr th:each="movie : ${movies}">
             <td>
                 <img th:src="*{'data:' + movie.imgType + ';base64,' + movie.encodedPoster}" alt="Poster of movie"/>
-<!--                <b class="bold" th:text="${post.title}"></b>-->
-<!--                <p th:text="${post.excerpt}"></p>-->
-<!--                <span>Author:</span><span th:text="${post.author.name}"></span>-->
-<!--                <b th:text="${post.publishedAt}"></b>-->
             </td>
             <td>
                 <b class="bold" th:text="${movie.name}"></b><br>
@@ -46,7 +42,6 @@
                 <span class="bold" th:text="${movie.producer}"></span><br>
                 <b class="bold" >Year Of Release:</b>
                 <span class="bold" th:text="${movie.yearOfRelease}"></span>
-<!--                <a th:href="@{/showPost/{id}(id=${post.pid})}" class="btn btn-primary">Show</a>-->
             </td>
             <td>
                 <a th:href="@{/deleteMovie/{id}(id=${movie.id})}" class="btn btn-danger">Delete</a>
@@ -55,10 +50,5 @@
         </tr>
         </tbody>
     </table>
-<!--    <form action="/test_upload" method="post" enctype="multipart/form-data">-->
-<!--        <input type="file" name="file">-->
-<!--        <input type="submit" value="Upload Poster">-->
-<!--    </form>-->
-
 </body>
 </html>
