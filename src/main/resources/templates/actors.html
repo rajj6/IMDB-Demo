@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>All Actors</title>
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+          crossorigin="anonymous">
+</head>
+<body>
+    <div class="container">
+        <h1>All Actors</h1>
+<!--        <a th:href="@{/showNewMovieForm}" class="btn btn-primary btn-sm mb-2"> Create Movie </a>-->
+
+        <table border="1" class="table table-striped table-responsive-md">
+            <thead>
+            <tr>
+                <th> Name </th>
+                <th> Sex </th>
+                <th> Date Of Birth </th>
+                <th> Bio </th>
+                <th> Action </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="actor : ${actors}">
+                <td>
+                    <b class="bold" th:text="${actor.name}"></b>
+<!--                    <img th:src="*{'data:' + movie.imgType + ';base64,' + movie.encodedPoster}" alt="Poster of movie"/>-->
+                    <!--                <b class="bold" th:text="${post.title}"></b>-->
+                    <!--                <p th:text="${post.excerpt}"></p>-->
+                    <!--                <span>Author:</span><span th:text="${post.author.name}"></span>-->
+                    <!--                <b th:text="${post.publishedAt}"></b>-->
+                </td>
+                <td>
+                    <p th:text="${actor.sex}"></p>
+                    <!--                <a th:href="@{/showPost/{id}(id=${post.pid})}" class="btn btn-primary">Show</a>-->
+                </td>
+                <td>
+                    <p th:text="${actor.DOB}"></p>
+                </td>
+                <td>
+                    <p th:text="${actor.bio}"></p>
+                </td>
+                <td>
+<!--                    <a th:href="@{/deleteMovie/{id}(id=${actor.id})}" class="btn btn-danger">Delete</a>-->
+                    <a th:href="@{/editActor/{id}(id=${actor.id})}" class="btn btn-primary">Edit</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

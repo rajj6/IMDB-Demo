@@ -1,4 +1,9 @@
 package com.raj.imdbdemo.service;
 
-public class ActorService {
+import com.raj.imdbdemo.dto.ActorDTO;
+
+import java.util.List;
+
+public interface ActorService {
+    List<ActorDTO> getAllActors();
 }
