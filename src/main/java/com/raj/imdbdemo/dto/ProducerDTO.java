@@ -1,6 +1,5 @@
 package com.raj.imdbdemo.dto;
 
-import com.raj.imdbdemo.entity.Actor;
 import com.raj.imdbdemo.entity.Producer;
 
 import java.sql.Date;

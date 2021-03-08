@@ -1,7 +1,6 @@
 package com.raj.imdbdemo.dto;
 
 import com.raj.imdbdemo.entity.Actor;
-import com.raj.imdbdemo.entity.Movie;
 
 import java.sql.Date;
 import java.util.ArrayList;

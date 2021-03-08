@@ -4,7 +4,6 @@ import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -26,10 +25,10 @@ public class Movie {
 
     private String imgType;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     private Producer producer;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     private Set<Actor> actors = new HashSet<>();
 
     public Movie() {
