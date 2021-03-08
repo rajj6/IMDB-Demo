@@ -25,7 +25,7 @@ public class ActorController {
         return "edit_actor_form";
     }
 
-    @PutMapping("/actor")
+    @PostMapping("/actor")
     public String updateActor(@ModelAttribute("actor")ActorDTO actor) {
         actorService.updateActor(actor);
         return "redirect:/actors";

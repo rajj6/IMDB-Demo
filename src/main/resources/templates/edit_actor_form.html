@@ -11,7 +11,7 @@
 <body>
     <div class="container">
         <h2>Edit Actor</h2>
-        <form action="#" th:action="@{/actor}" method="put" enctype="multipart/form-data">
+        <form action="#" th:action="@{/actor}" method="post" enctype="multipart/form-data">
             <input type="hidden" th:field="*{actor.id}">
             <input type="text" th:field="*{actor.name}" placeholder="Name" class="form-control mb cp-4" required>
             <input type="text" th:field="*{actor.sex}" placeholder="Sex" class="form-control mb cp-4" required>
