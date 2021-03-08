@@ -11,18 +11,8 @@
 <body>
 
     <div class="container">
-<!--        <h2>Create Movie</h2>-->
-<!--        <form action="#" th:action="@{/saveMovie}" th:object="${movie}" method="post">-->
-<!--            <input type="text" th:field="*{name}" placeholder="Name" class="form-control mb cp-4" required>-->
-<!--            <input type="number" th:field="*{yearOfRelease}" placeholder="Year Of Release" class="form-control mb cp-4" required>-->
-<!--            <textarea type="text" rows="10" th:field="*{plot}" placeholder="Plot" class="form-control mb cp-4" required></textarea>-->
-<!--            <label for="poster" class="btn">Select Image:</label>-->
-<!--            <input id="poster" type="file" th:field="*{poster}" required formenctype="multipart/form-data">-->
-<!--            <button type="submit" class="btn btn-info col-2"> Save </button>-->
-<!--        </form>-->
-
         <h2>Create Movie</h2>
-        <form action="/saveMovie" method="post" enctype="multipart/form-data">
+        <form action="/movie" method="post" enctype="multipart/form-data">
             <input type="text" name="name" placeholder="Title of Movie" class="form-control mb cp-4" required>
             <input type="number" name="yearOfRelease" placeholder="Year Of Release" class="form-control mb cp-4" min="1980" max="2022" required>
             <textarea type="text" name="plot" rows="10" placeholder="Plot of Movie" class="form-control mb cp-4" required></textarea>

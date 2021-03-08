@@ -9,12 +9,12 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 @Controller
-public class MainControllers {
+public class MovieController {
 
     @Autowired
     MovieService movieService;
 
-    @GetMapping({"/home", "/"})
+    @GetMapping("/movies")
     public String home(Model model) {
         model.addAttribute("movies", movieService.getAllMovies());
         return "home";
@@ -25,7 +25,7 @@ public class MainControllers {
         return "new_movie_form";
     }
 
-    @PostMapping("/saveMovie")
+    @PostMapping("/movie")
     public String saveMovie(@RequestParam(name = "name") String name,
                             @RequestParam(name = "yearOfRelease") int yearOfRelease,
                             @RequestParam(name = "plot") String plot,
