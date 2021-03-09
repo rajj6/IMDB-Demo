@@ -14,7 +14,7 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "actors", uniqueConstraints = @UniqueConstraint(name = "Unique Name of Actor", columnNames = "name"))
+@Table(name = "actors")
 public class Actor {
 
     @Id

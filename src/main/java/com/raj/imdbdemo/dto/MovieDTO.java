@@ -37,12 +37,9 @@ public class MovieDTO {
         return movieDTO;
     }
 
+    // Overloaded
     public void setProducer(Movie movie) {
         this.producer = movie.getProducer().getName();
-    }
-
-    public void setProducer(String producer) {
-        this.producer = producer;//movie.getProducer().getName();
     }
 
     public void setActors(Movie movie) {

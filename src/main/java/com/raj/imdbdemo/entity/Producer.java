@@ -13,7 +13,7 @@ import java.util.Collection;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "producers", uniqueConstraints = @UniqueConstraint(name = "Unique Name of Producer", columnNames = "name"))
+@Table(name = "producers")
 public class Producer {
 
     @Id
@@ -29,10 +29,6 @@ public class Producer {
 
     @OneToMany(mappedBy = "producer")
     private Collection<Movie> movies;
-
-    public Long getId() {
-        return id;
-    }
 
     public Producer(String name) {
         this.name = name;
