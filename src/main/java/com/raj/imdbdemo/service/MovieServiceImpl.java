@@ -39,11 +39,6 @@ public class MovieServiceImpl implements MovieService{
         }
     }
 
-//    public void saveMovie(MovieDTO movieDTO) {
-////        Movie movie = new Movie(movieDTO.getName(), movieDTO.getYearOfRelease(), movieDTO.getPlot());
-//        movieRepository.save(new Movie(movieDTO.getName(), movieDTO.getYearOfRelease(), movieDTO.getPlot()));
-//    }
-
     @Override
     public void saveMovie(String name, Integer yearOdRelease, String plot, MultipartFile poster, String producerName, String actors) {
 
@@ -68,6 +63,31 @@ public class MovieServiceImpl implements MovieService{
     }
 
     @Override
+    public void updateMovie(Long id, String name, Integer yearOdRelease, String plot, MultipartFile poster, String producerName, String actors) {
+        Movie movie = movieRepository.getOne(id);
+        movie.setName(name);
+        movie.setYearOfRelease(yearOdRelease);
+        movie.setPlot(plot);
+        movie.getActors().clear();
+        addActorsInMovie(movie, actors);
+        Producer producer = producerRepository.findProducerByNameIgnoreCase(producerName);
+        if (producer != null) {
+            movie.setProducer(producer);
+        } else {
+            movie.setProducer(producerRepository.save(new Producer(producerName)));
+        }
+        if (!poster.isEmpty()) {
+            try {
+                movie.setPoster(poster.getBytes());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            movie.setImgType(poster.getContentType());
+        }
+        movieRepository.save(movie);
+    }
+
+    @Override
     public void updateMovie(MovieDTO movieDTO, MultipartFile poster) {
         Movie movie = movieRepository.getOne(movieDTO.getId());
         movie.setName(movieDTO.getName());
@@ -89,7 +109,6 @@ public class MovieServiceImpl implements MovieService{
             }
             movie.setImgType(poster.getContentType());
         }
-
         movieRepository.save(movie);
     }
 

@@ -41,6 +41,10 @@ public class MovieDTO {
         this.producer = movie.getProducer().getName();
     }
 
+    public void setProducer(String producer) {
+        this.producer = producer;//movie.getProducer().getName();
+    }
+
     public void setActors(Movie movie) {
         String actors = "";
         for (Actor actor : movie.getActors()) {

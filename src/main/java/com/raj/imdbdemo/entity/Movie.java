@@ -25,10 +25,10 @@ public class Movie {
 
     private String imgType;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     private Producer producer;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany
     private Set<Actor> actors = new HashSet<>();
 
     public Movie() {

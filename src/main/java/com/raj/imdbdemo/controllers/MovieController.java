@@ -1,57 +1,53 @@
 package com.raj.imdbdemo.controllers;
 
-import com.raj.imdbdemo.dto.MovieDTO;
 import com.raj.imdbdemo.service.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-@Controller
+@RestController
 public class MovieController {
 
     @Autowired
     MovieService movieService;
 
     @GetMapping("/movies")
-    public String home(Model model) {
-        model.addAttribute("movies", movieService.getAllMovies());
-        return "home";
-    }
-
-    @GetMapping("/showNewMovieForm")
-    public String newMovieForm(Model model) {
-        return "new_movie_form";
+    public Object home(Model model) {
+        return movieService.getAllMovies();
     }
 
     @PostMapping("/movie")
-    public String saveMovie(@RequestParam(name = "name") String name,
+    public Object saveMovie(@RequestParam(name = "name") String name,
                             @RequestParam(name = "yearOfRelease") int yearOfRelease,
                             @RequestParam(name = "plot") String plot,
                             @ModelAttribute("poster") MultipartFile poster,
                             @ModelAttribute("producer") String producer,
                             @ModelAttribute("actors") String actors) {
         movieService.saveMovie(name,yearOfRelease,plot,poster,producer, actors);
-        return "redirect:/home";
+        return "Movie saved in Database";
     }
 
-    @GetMapping("/deleteMovie/{id}")
+    @DeleteMapping("/movie/{id}")
     public String deleteMovie(@PathVariable("id") Long id) {
         movieService.deleteMovieById(id);
-        return "redirect:/home";
+        return "Deleted movie with id: " + id;
     }
 
-    @GetMapping("/editMovie/{id}")
-    public String editMovie(@PathVariable("id") Long id, Model model) {
-        model.addAttribute("movie",movieService.getMovieById(id));
-        return "edit_movie_form";
+    @GetMapping("/movie/{id}")
+    public Object getMovie(@PathVariable("id") Long id) {
+        return movieService.getMovieById(id);
     }
 
-    @PostMapping("/updateMovie")
-    public String updateMovie(@ModelAttribute("movie") MovieDTO movie,
-                              @ModelAttribute("poster") MultipartFile poster) {
-        movieService.updateMovie(movie, poster);
-        return "redirect:/home";
+    @PutMapping("/movie")
+    public String updateMovie(@RequestParam("id") Long id,
+                              @RequestParam(name = "name") String name,
+                              @RequestParam(name = "yearOfRelease") int yearOfRelease,
+                              @RequestParam(name = "plot") String plot,
+                              @ModelAttribute("poster") MultipartFile poster,
+                              @ModelAttribute("producer") String producer,
+                              @ModelAttribute("actors") String actors) {
+        movieService.updateMovie(id, name, yearOfRelease, plot, poster, producer, actors);
+        return "Movie Updated";
     }
 }
