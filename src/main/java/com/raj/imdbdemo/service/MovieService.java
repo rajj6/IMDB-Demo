@@ -1,13 +1,9 @@
 package com.raj.imdbdemo.service;
 
 import com.raj.imdbdemo.dto.MovieDTO;
-import com.raj.imdbdemo.entity.Actor;
 import com.raj.imdbdemo.entity.Movie;
-import com.raj.imdbdemo.entity.Producer;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 public interface MovieService {
