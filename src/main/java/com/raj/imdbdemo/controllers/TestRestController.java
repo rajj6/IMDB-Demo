@@ -33,15 +33,4 @@ public class TestRestController {
         System.out.println(poster.getSize());
         return poster;
     }
-
-//    @PostMapping("/movie")
-//    public Object saveMovie(@RequestParam(name = "name") String name,
-//                            @RequestParam(name = "yearOfRelease") int yearOfRelease,
-//                            @RequestParam(name = "plot") String plot,
-//                            @ModelAttribute("poster") MultipartFile poster,
-//                            @ModelAttribute("producer") String producer,
-//                            @ModelAttribute("actors") String actors) {
-//        movieService.saveMovie(name,yearOfRelease,plot,poster,producer, actors);
-//        return "Movie saved in Database";
-//    }
 }
