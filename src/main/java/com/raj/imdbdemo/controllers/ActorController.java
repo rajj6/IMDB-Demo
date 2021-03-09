@@ -26,6 +26,6 @@ public class ActorController {
     @PutMapping("/actor")
     public String updateActor(@RequestBody ActorDTO actor) {
         actorService.updateActor(actor);
-        return "Updated";
+        return "Actor Updated";
     }
 }
