@@ -7,5 +7,5 @@ import java.util.List;
 public interface ProducerService {
     List<ProducerDTO> getAllProducer();
     ProducerDTO getProducerById(long id);
-    void updateProducer(ProducerDTO producerDTO);
+    ProducerDTO updateProducer(ProducerDTO producerDTO);
 }

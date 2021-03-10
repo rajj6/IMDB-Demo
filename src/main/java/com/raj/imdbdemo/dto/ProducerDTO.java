@@ -4,13 +4,14 @@ import com.raj.imdbdemo.entity.Producer;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 
+import java.io.Serializable;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
 @Data
 @AllArgsConstructor
-public class ProducerDTO {
+public class ProducerDTO implements Serializable {
     private Long id;
     private String name;
     private String sex;

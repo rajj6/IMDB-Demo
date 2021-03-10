@@ -30,13 +30,11 @@ public class ActorServiceImpl implements ActorService {
     @Override
     @CachePut(value = "actorDTO", key = "#actorDTO.id")
     public ActorDTO updateActor(ActorDTO actorDTO) {
-        System.out.println(actorDTO);
         Actor actor =  actorRepository.getOne(actorDTO.getId());
         actor.setName(actorDTO.getName());
         actor.setSex(actorDTO.getSex());
         actor.setBio(actorDTO.getBio());
         actor.setDOB(actorDTO.getDOB());
-        System.out.println(actor);
         Actor actorSaved = actorRepository.save(actor);
         return ActorDTO.mapEntityToDTO(actorSaved);
     }
