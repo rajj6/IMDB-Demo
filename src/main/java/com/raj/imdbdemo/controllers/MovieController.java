@@ -1,5 +1,6 @@
 package com.raj.imdbdemo.controllers;
 
+import com.raj.imdbdemo.dto.MovieDTO;
 import com.raj.imdbdemo.service.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
@@ -49,5 +50,10 @@ public class MovieController {
                               @ModelAttribute("actors") String actors) {
         movieService.updateMovie(id, name, yearOfRelease, plot, poster, producer, actors);
         return "Movie Updated";
+    }
+
+    @GetMapping("/movie")
+    public Object search(@RequestParam(value = "search", required = false) String keyword) {
+        return movieService.search(keyword);
     }
 }

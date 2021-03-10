@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -138,5 +139,29 @@ public class MovieServiceImpl implements MovieService{
     public void deleteMovieById(long id) {
         Movie existingMovie = movieRepository.findById(id).orElseThrow(()->new DataNotFound("Movie with id: "+id+" not found."));
         movieRepository.delete(existingMovie);
+    }
+
+    @Override
+    public List<MovieDTO> search(String keyword) {
+        List<MovieDTO> movieDTOList = new ArrayList<>();
+        for(Movie movie : movieRepository.findAll(searchSpecification(keyword))) {
+            movieDTOList.add(MovieDTO.mapEntityToDTO(movie));
+        }
+        return movieDTOList;
+    }
+
+    private Specification<Movie> searchSpecification(String keyword) {
+        return ((root, criteriaQuery, criteriaBuilder) -> {
+            criteriaQuery.distinct(true);
+            if ((keyword ==null)) {
+                return null;
+            }
+            return criteriaBuilder.or(
+                    criteriaBuilder.like(root.get("name"), "%" + keyword + "%"),
+                    criteriaBuilder.like(root.get("plot"), "%" + keyword + "%"),
+                    criteriaBuilder.equal(root.join("actors").get("name"), keyword),
+                    criteriaBuilder.equal(root.join("producer").get("name"), keyword)
+            );
+        });
     }
 }

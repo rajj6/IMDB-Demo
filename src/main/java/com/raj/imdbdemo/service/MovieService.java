@@ -15,4 +15,5 @@ public interface MovieService {
     MovieDTO getMovieById(Long id);
     List<MovieDTO> getAllMovies();
     void deleteMovieById(long id);
+    List<MovieDTO> search(String keyword);
 }
