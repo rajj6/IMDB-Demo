@@ -4,6 +4,7 @@ import com.raj.imdbdemo.dto.MovieDTO;
 import com.raj.imdbdemo.entity.Actor;
 import com.raj.imdbdemo.entity.Movie;
 import com.raj.imdbdemo.entity.Producer;
+import com.raj.imdbdemo.exception.DataNotFound;
 import com.raj.imdbdemo.repo.ActorRepository;
 import com.raj.imdbdemo.repo.MovieRepository;
 import com.raj.imdbdemo.repo.ProducerRepository;
@@ -68,7 +69,7 @@ public class MovieServiceImpl implements MovieService{
     @Override
     @CachePut(value = "movieDTO", key = "#id")
     public MovieDTO updateMovie(Long id, String name, Integer yearOdRelease, String plot, MultipartFile poster, String producerName, String actors) {
-        Movie movie = movieRepository.getOne(id);
+        Movie movie = movieRepository.findById(id).orElseThrow(()->new DataNotFound("Movie with id: "+id+" not found."));
         movie.setName(name);
         movie.setYearOfRelease(yearOdRelease);
         movie.setPlot(plot);
@@ -120,7 +121,7 @@ public class MovieServiceImpl implements MovieService{
     @Override
     @Cacheable(value = "movieDTO", key = "#id")
     public MovieDTO getMovieById(Long id) {
-        return MovieDTO.mapEntityToDTO(movieRepository.getOne(id));
+        return MovieDTO.mapEntityToDTO(movieRepository.findById(id).orElseThrow(()->new DataNotFound("Movie with id: "+id+" not found.")));
     }
 
     @Override
@@ -135,7 +136,7 @@ public class MovieServiceImpl implements MovieService{
     @Override
     @CacheEvict(value = "movieDTO", key = "#id")
     public void deleteMovieById(long id) {
-        movieRepository.deleteById(id);
+        Movie existingMovie = movieRepository.findById(id).orElseThrow(()->new DataNotFound("Movie with id: "+id+" not found."));
+        movieRepository.delete(existingMovie);
     }
-
 }

@@ -2,6 +2,7 @@ package com.raj.imdbdemo.service;
 
 import com.raj.imdbdemo.dto.ProducerDTO;
 import com.raj.imdbdemo.entity.Producer;
+import com.raj.imdbdemo.exception.DataNotFound;
 import com.raj.imdbdemo.repo.ProducerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CachePut;
@@ -22,13 +23,13 @@ public class ProducerServiceImpl implements ProducerService{
     @Override
     @Cacheable(value = "producerDTO", key = "#id")
     public ProducerDTO getProducerById(long id) {
-        return ProducerDTO.mapEntityToDTO(producerRepository.getOne(id));
+        return ProducerDTO.mapEntityToDTO(producerRepository.findById(id).orElseThrow(()-> new DataNotFound("Producer with id: "+id+" not found")));
     }
 
     @Override
     @CachePut(value = "producerDTO", key = "#producerDTO.id")
     public ProducerDTO updateProducer(ProducerDTO producerDTO) {
-        Producer producer = producerRepository.getOne(producerDTO.getId());
+        Producer producer = producerRepository.findById(producerDTO.getId()).orElseThrow(()-> new DataNotFound("Producer with id: "+producerDTO.getId()+" not found"));
         producer.setName(producerDTO.getName());
         producer.setSex(producerDTO.getSex());
         producer.setDOB(producerDTO.getDOB());
