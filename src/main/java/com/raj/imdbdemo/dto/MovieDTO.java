@@ -8,10 +8,12 @@ import lombok.NoArgsConstructor;
 import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.Serializable;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class MovieDTO {
+public class MovieDTO implements Serializable {
 
     private Long id;
     private String name;

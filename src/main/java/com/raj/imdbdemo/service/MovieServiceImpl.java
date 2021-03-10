@@ -8,6 +8,9 @@ import com.raj.imdbdemo.repo.ActorRepository;
 import com.raj.imdbdemo.repo.MovieRepository;
 import com.raj.imdbdemo.repo.ProducerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -63,7 +66,8 @@ public class MovieServiceImpl implements MovieService{
     }
 
     @Override
-    public void updateMovie(Long id, String name, Integer yearOdRelease, String plot, MultipartFile poster, String producerName, String actors) {
+    @CachePut(value = "movieDTO", key = "#id")
+    public MovieDTO updateMovie(Long id, String name, Integer yearOdRelease, String plot, MultipartFile poster, String producerName, String actors) {
         Movie movie = movieRepository.getOne(id);
         movie.setName(name);
         movie.setYearOfRelease(yearOdRelease);
@@ -84,7 +88,8 @@ public class MovieServiceImpl implements MovieService{
             }
             movie.setImgType(poster.getContentType());
         }
-        movieRepository.save(movie);
+        Movie movieSaved = movieRepository.save(movie);
+        return MovieDTO.mapEntityToDTO(movieSaved);
     }
 
     @Override
@@ -113,6 +118,7 @@ public class MovieServiceImpl implements MovieService{
     }
 
     @Override
+    @Cacheable(value = "movieDTO", key = "#id")
     public MovieDTO getMovieById(Long id) {
         return MovieDTO.mapEntityToDTO(movieRepository.getOne(id));
     }
@@ -127,18 +133,9 @@ public class MovieServiceImpl implements MovieService{
     }
 
     @Override
+    @CacheEvict(value = "movieDTO", key = "#id")
     public void deleteMovieById(long id) {
         movieRepository.deleteById(id);
     }
 
-//    public List<MovieDTO> getAllMovies() {
-//        movieRepository.findAll();
-//        List<MovieDTO> movieDTOList = new ArrayList<>();
-//        for (Movie movie : movieRepository.findAll()) {
-//            MovieDTO movieDTO = new MovieDTO();
-//            movieDTO.
-//            movieDTOList
-//        }
-//        return
-//    }
 }

@@ -10,7 +10,7 @@ public interface MovieService {
 
     void addActorsInMovie(Movie movie, String actors);
     void saveMovie(String name, Integer yearOdRelease, String plot, MultipartFile poster, String producerName, String actors);
-    void updateMovie(Long id, String name, Integer yearOdRelease, String plot, MultipartFile poster, String producerName, String actors);
+    MovieDTO updateMovie(Long id, String name, Integer yearOdRelease, String plot, MultipartFile poster, String producerName, String actors);
     void updateMovie(MovieDTO movieDTO, MultipartFile poster);
     MovieDTO getMovieById(Long id);
     List<MovieDTO> getAllMovies();
