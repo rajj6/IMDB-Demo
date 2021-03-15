@@ -1,8 +1,3 @@
-drop table if exists movies_actors cascade;
-drop table if exists actors cascade;
-drop table if exists movies cascade;
-drop table if exists producers cascade;
-
 create table actors (
        id int8 not null,
         dob date,
