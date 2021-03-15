@@ -159,8 +159,8 @@ public class MovieServiceImpl implements MovieService{
             return criteriaBuilder.or(
                     criteriaBuilder.like(root.get("name"), "%" + keyword + "%"),
                     criteriaBuilder.like(root.get("plot"), "%" + keyword + "%"),
-                    criteriaBuilder.equal(root.join("actors").get("name"), keyword),
-                    criteriaBuilder.equal(root.join("producer").get("name"), keyword)
+                    criteriaBuilder.like(root.join("actors").get("name"), "%" + keyword + "%"),
+                    criteriaBuilder.like(root.join("producer").get("name"), "%" + keyword + "%")
             );
         });
     }
